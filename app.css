@@ -266,12 +266,12 @@ html {
 
 @media screen and (max-width:320px) {
   .header {
-    padding-top: 1rem;
+    padding-top: 0.1rem;
   }
 
   .container_header {
     padding-bottom: 2rem;
-    padding-top: 1rem;
+    padding-top: 0.1rem;
   }
 
   .container_header > h2 {
