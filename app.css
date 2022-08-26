@@ -51,7 +51,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem 2rem 8rem 2rem;
+  padding: 2rem 2rem 6rem 2rem;
 }
 
 .container_header > h2 {
