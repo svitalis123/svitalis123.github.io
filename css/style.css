@@ -233,7 +233,7 @@ th {
 
 .w-icon-nav-menu:before {
     content: "";
-    color: var(--color--white);
+    color: var(--color--white) !important;
 }
 
 .w-icon-arrow-down:before,
@@ -1984,7 +1984,7 @@ textarea.w-select {
         display: none;
     }
     .w-nav[data-collapse="medium"] .w-nav-button {
-        display: block;
+        display: flex;
     }
 }
 
