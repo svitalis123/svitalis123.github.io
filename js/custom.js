@@ -170,3 +170,105 @@ $(document).ready(function() {
         updateCarousel();
     }
 });
+    // Ensure all contact elements trigger Tally popup
+    function initContactPopups() {
+        // Find all contact-related elements
+        const contactSelectors = [
+            '[data-tally-open]',
+            '.footer-contact-link',
+            '.floating-contact',
+            '.button-small-primary-1',
+            '.button-secondary',
+            '.button-primary-1',
+            'a[href*="contact"]',
+            'a[href*="mailto"]',
+            'a[href*="tel"]'
+        ];
+        
+        contactSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                // Add Tally attributes if they don't exist
+                if (!element.hasAttribute('data-tally-open')) {
+                    element.setAttribute('data-tally-open', 'mDgQRp');
+                    element.setAttribute('data-tally-emoji-text', '👋');
+                    element.setAttribute('data-tally-emoji-animation', 'wave');
+                }
+                
+                // Add click event listener as backup
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Try to open Tally popup
+                    if (window.Tally && window.Tally.openPopup) {
+                        window.Tally.openPopup('mDgQRp', {
+                            emoji: {
+                                text: '👋',
+                                animation: 'wave'
+                            }
+                        });
+                    } else {
+                        // Fallback: try to trigger Tally via data attributes
+                        const tallyEvent = new CustomEvent('tally:open', {
+                            detail: { formId: 'mDgQRp' }
+                        });
+                        document.dispatchEvent(tallyEvent);
+                    }
+                });
+            });
+        });
+    }
+    
+    // Initialize contact popups when DOM is ready
+    initContactPopups();
+    
+    // Re-initialize if Tally script loads later
+    window.addEventListener('load', function() {
+        setTimeout(initContactPopups, 1000);
+    });
+    
+    // Tally popup initialization with retry mechanism
+    function initTallyPopup() {
+        // Check if Tally is available
+        if (window.Tally) {
+            console.log('Tally is available');
+            return;
+        }
+        
+        // Wait for Tally to load
+        let attempts = 0;
+        const maxAttempts = 50; // 5 seconds max wait
+        
+        const checkTally = setInterval(function() {
+            attempts++;
+            
+            if (window.Tally || attempts >= maxAttempts) {
+                clearInterval(checkTally);
+                
+                if (window.Tally) {
+                    console.log('Tally loaded successfully');
+                    // Re-initialize contact popups now that Tally is available
+                    initContactPopups();
+                } else {
+                    console.warn('Tally failed to load, using fallback');
+                    // Add manual popup trigger as fallback
+                    addFallbackContactHandler();
+                }
+            }
+        }, 100);
+    }
+    
+    // Fallback contact handler if Tally doesn't load
+    function addFallbackContactHandler() {
+        const contactElements = document.querySelectorAll('[data-tally-open], .footer-contact-link, .floating-contact');
+        contactElements.forEach(element => {
+            element.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Open a simple contact form or redirect
+                alert('Contact form will open here. Please email us at hello@eduyetu.com or call +254 700 000 000');
+            });
+        });
+    }
+    
+    // Initialize Tally popup system
+    initTallyPopup();
