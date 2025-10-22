@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://eduyetu.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Disallow crawling of admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow crawling of CSS and JS files for better rendering
+Allow: /css/
+Allow: /js/
+Allow: /images/

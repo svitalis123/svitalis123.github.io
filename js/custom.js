@@ -265,7 +265,7 @@ $(document).ready(function() {
             element.addEventListener('click', function(e) {
                 e.preventDefault();
                 // Open a simple contact form or redirect
-                alert('Contact form will open here. Please email us at hello@eduyetu.com or call +254 700 000 000');
+                alert('Contact form will open here. Please call us on +254746272662');
             });
         });
     }

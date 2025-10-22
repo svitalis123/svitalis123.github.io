@@ -1291,6 +1291,7 @@ tact popup styling */
 
 .footer-contact-link {
     cursor: pointer !important;
+    color: var(--color-white) !important;
     transition: all 0.3s ease;
 }
 
