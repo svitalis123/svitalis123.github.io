@@ -188,6 +188,11 @@ $(document).ready(function() {
         contactSelectors.forEach(selector => {
             const elements = document.querySelectorAll(selector);
             elements.forEach(element => {
+                // Skip the Join the Movement button
+                if (element.classList.contains('join-movement-btn')) {
+                    return;
+                }
+                
                 // Add Tally attributes if they don't exist
                 if (!element.hasAttribute('data-tally-open')) {
                     element.setAttribute('data-tally-open', 'mDgQRp');
@@ -195,26 +200,28 @@ $(document).ready(function() {
                     element.setAttribute('data-tally-emoji-animation', 'wave');
                 }
                 
-                // Add click event listener as backup
-                element.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Try to open Tally popup
-                    if (window.Tally && window.Tally.openPopup) {
-                        window.Tally.openPopup('mDgQRp', {
-                            emoji: {
-                                text: '👋',
-                                animation: 'wave'
-                            }
-                        });
-                    } else {
-                        // Fallback: try to trigger Tally via data attributes
-                        const tallyEvent = new CustomEvent('tally:open', {
-                            detail: { formId: 'mDgQRp' }
-                        });
-                        document.dispatchEvent(tallyEvent);
-                    }
-                });
+                // Add click event listener as backup (skip Join the Movement button)
+                if (!element.classList.contains('join-movement-btn')) {
+                    element.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Try to open Tally popup
+                        if (window.Tally && window.Tally.openPopup) {
+                            window.Tally.openPopup('mDgQRp', {
+                                emoji: {
+                                    text: '👋',
+                                    animation: 'wave'
+                                }
+                            });
+                        } else {
+                            // Fallback: try to trigger Tally via data attributes
+                            const tallyEvent = new CustomEvent('tally:open', {
+                                detail: { formId: 'mDgQRp' }
+                            });
+                            document.dispatchEvent(tallyEvent);
+                        }
+                    });
+                }
             });
         });
     }
