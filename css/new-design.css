@@ -172,7 +172,7 @@
 .hero-section {
   width: 100%;
   padding-top: var(--hero-padding-top);
-  padding-bottom: var(--hero-padding-bottom);
+  padding-bottom: 16px; /* 16px on mobile */
   overflow: hidden;
   position: relative;
 }
@@ -378,7 +378,7 @@
 */
 .why-section {
   width: 100%;
-  padding: var(--why-padding);
+  padding: clamp(2rem, 4vw, 2.75rem) clamp(1rem, 3vw, 2.063rem) 16px; /* 16px bottom padding on mobile */
   background: var(--color-primary);
   display: flex;
   justify-content: center;
@@ -1084,7 +1084,7 @@
   display: flex;
   padding: var(--team-badge-padding);
   width: auto;
-  max-width: clamp(150px, 40vw, 400.707px);
+  max-width: clamp(150px, 40vw, 800.707px);
   height: auto;
   min-height: clamp(1rem, 2vw, 1rem);
   flex-direction: column;
