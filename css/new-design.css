@@ -199,6 +199,7 @@
   align-items: center;
   gap: var(--hero-content-gap);
   text-align: center;
+  padding-bottom: 1rem;
 }
 
 /* Hero Title */
@@ -746,6 +747,7 @@
   
   .hero-content {
     max-width: 90%;
+    padding-bottom: 0px;
   }
   
   .hero-cta-group {
@@ -1084,7 +1086,6 @@
   display: flex;
   padding: var(--team-badge-padding);
   width: auto;
-  max-width: clamp(150px, 40vw, 800.707px);
   height: auto;
   min-height: clamp(1rem, 2vw, 1rem);
   flex-direction: column;
