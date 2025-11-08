@@ -293,7 +293,7 @@
   ===========================================
 */
 .hero-features {
-  display: flex;
+  display: none; /* Hidden on mobile */
   flex-direction: column;
   gap: var(--space-3);
   width: 100%;
@@ -753,6 +753,7 @@
   }
   
   .hero-features {
+    display: flex; /* Show on tablet and above */
     max-width: 100%;
   }
   
@@ -1063,10 +1064,11 @@
 */
 .team-experience-holder {
   display: flex;
-  height: var(--team-badge-height);
+  flex-direction: column; /* Vertical on mobile */
+  height: auto;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 .team-experience-badge {
   width: fit-content;
@@ -1140,6 +1142,12 @@
 @media screen and (min-width: 768px) {
   .team-cards {
     padding: 0 clamp(1rem, 4vw, 2.063rem);
+  }
+  
+  .team-experience-holder {
+    flex-direction: row; /* Horizontal on tablet and above */
+    height: var(--team-badge-height);
+    gap: 8px;
   }
   
   .team-experience-text {
