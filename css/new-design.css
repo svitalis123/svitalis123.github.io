@@ -660,18 +660,23 @@
 
 /* 
   ===========================================
-  APP CARDS - MOBILE (2 per row)
+  APP CARDS - MOBILE (Horizontal Scroll)
   ===========================================
 */
 .app-cards {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Don't wrap on mobile */
   gap: var(--app-cards-gap);
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 1280px;
   position: relative;
   z-index: 2;
+  overflow-x: auto; /* Enable horizontal scroll */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scroll-snap-type: x mandatory; /* Snap to cards */
+  padding-bottom: 1rem; /* Space for scrollbar */
 }
 
 /* 
@@ -681,7 +686,8 @@
 */
 .app-card {
   display: flex;
-  width: var(--app-card-width);
+  min-width: clamp(250px, 70vw, 300px); /* Fixed width for scrolling on mobile */
+  width: clamp(250px, 70vw, 300px);
   padding: var(--app-card-padding);
   align-items: center;
   gap: var(--app-card-gap);
@@ -695,6 +701,8 @@
               4px 4px 13px 0 rgba(199, 199, 199, 0.10), 
               0 0 0 0 rgba(199, 199, 199, 0.10);
   transition: all var(--transition-base);
+  flex-shrink: 0; /* Prevent shrinking in scroll container */
+  scroll-snap-align: start; /* Snap alignment */
 }
 
 .app-card:hover {
@@ -737,6 +745,35 @@
 
 /* 
   ===========================================
+  APP CARDS SCROLLBAR STYLING
+  ===========================================
+*/
+.app-cards::-webkit-scrollbar {
+  height: 8px;
+}
+
+.app-cards::-webkit-scrollbar-track {
+  background: rgba(180, 51, 209, 0.1);
+  border-radius: 10px;
+}
+
+.app-cards::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 10px;
+}
+
+.app-cards::-webkit-scrollbar-thumb:hover {
+  background: #9c2ab8;
+}
+
+/* Firefox scrollbar */
+.app-cards {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) rgba(180, 51, 209, 0.1);
+}
+
+/* 
+  ===========================================
   TABLET BREAKPOINT (768px+)
   ===========================================
 */
@@ -773,6 +810,14 @@
   /* App Section - Adjust for tablet */
   .app-cards {
     max-width: 90%;
+    flex-wrap: wrap; /* Allow wrapping on tablet */
+    overflow-x: visible; /* Disable scroll on tablet */
+    justify-content: center;
+  }
+  
+  .app-card {
+    min-width: auto;
+    width: var(--app-card-width);
   }
 }
 

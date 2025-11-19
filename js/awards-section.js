@@ -26,6 +26,13 @@ class AwardsAccordion {
   enableAccordion() {
     this.buttons.forEach((button, index) => {
       button.addEventListener('click', (e) => {
+        // If it's a link (has href), don't prevent default - let it navigate
+        if (button.tagName === 'A' && button.hasAttribute('href')) {
+          // Allow the link to work normally
+          return;
+        }
+        
+        // For buttons without links, toggle accordion
         e.preventDefault();
         this.toggleCard(index);
       });
